@@ -1,6 +1,7 @@
 #!/usr/bin/python
 from os import listdir
 from os.path import join
+from os.path import isfile
 from bson.code import Code
 from pymongo.connection import MongoClient
 import argparse
