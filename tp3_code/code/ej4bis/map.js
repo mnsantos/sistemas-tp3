@@ -1,5 +1,3 @@
 function() {
-    	emit('max', { hour : this.hour, comments: this.number_of_comments});
-	emit('min', { hour : this.hour, comments: this.number_of_comments});
-
+    	emit('result', { hour : this._id, comments: this.value});
 }
