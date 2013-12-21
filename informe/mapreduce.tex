@@ -29,15 +29,52 @@ La función \textbf{map} genera $cuatro$ claves:
 
 La función \textbf{reduce} se reduce en sumar todos los valores para cada clave. De esta forma contabilizamos los posts de votos positivos, los negativos y los neutrales, y al mismo tiempo calculamos el $vote-trend$ de manera tal que si el resultado es positivo la comunidad podría definirse como $upvoter$, $downvoter$ de lo contrario o $neutral$ si $vote-trend$ es exactamente cero.
 
+~
+
+Con 21270 $downvoted-posts$, 106092 $upvoted-posts$ y 4941 $neutral-posts$, el $vote-trend$ da como resultado 84821, lo cual indica que la comunidad es upvoter.
+
 \subsubsection{Comentarios por submission}
 
-Queremos encontrar en promedio cuantos comentarios se realizan por cada submission. Para ello se implementa un único MapReduce sobre la colección de posts.
+Queremos encontrar en promedio cuantos comentarios se realizan por cada submission. Para ello se implementa un único MapReduce sobre la colección de posts en conjunto con la función finalize para calcular el promedio final.
+
+~
+
+La función \textbf{map} genera una única clave $comments$ donde por cada post se genera un valor compuesto por el número de comentarios del mismo y un field $count$ para contabilizar la cantidad de posts.
 
 
-La función \textbf{map} genera una única clave $comments$ donde por cada post se genera un valor con el numero de comentarios del mismo.
+La función \textbf{reduce} hace la suma total de todos los comentarios y los posts (count).
 
 
-La función \textbf{reduce} hace la suma total de todos los comentarios y luego hace el promedio.
+Luego de que se efectuan los reduce necesarios, se procede con la función \textbf{finalize}, la cual calcula el promedio de comentarios teniendo ya el número total de comentarios (sum($comments$)) y el número de posts (sum($count$)).
+
+~
+
+Como resultado obtuvimos que, en promedio, se efectuan alrededor de 39 comentarios por submission.
 
 \subsubsection{Usuario con más puntaje}
+
+Queremos encontrar el usuario cuya suma de los scores de sus posts supere la de los demás. Para ello encadenamos dos MapReduce: el primero sobre la colección posts y el segundo sobre la colección generada por el primer MapReduce.
+
+~
+
+El primer MapReduce se resume en generar una clave por cada usuario, cada una emitida conjuntamente con su score. Luego se suman todos los scores para cada usuario y de esa manera se obtiene el score total de cada uno.
+
+El segundo MapReduce consiste en encontrar, dados los scores totales de cada uno de los usuarios, aquel que suma más que el resto. Para ello se emite una única clave 'max', con valores asociados compuestos por una tupla usuario-score por cada usuario de nuestra red. Luego durante el reduce tomamos el usuario con el máximo score dentro de nuestra lista de values. 
+
+~
+
+Encontramos que el usuario con mayor score es 'nombre vacio' con 1311814 pts.
+
 \subsubsection{Horario más y menos activo}
+
+Queremos encontrar el horario en el cual la comunidad participa más comentando posts, es decir, determinar de alguna manera el mejor horario para postear. Análogamente determinamos el horario en el cual menos se comenta. Para ello utilizamos nuevamente dos MapReduce encadenados.
+
+~
+
+El primer MapReduce se resume en generar una clave por hora, es decir un total de 24 claves. Para ello se utiliza la función $substring(int idx0, int idxn)$ para quedarnos a partir del $raw-time$ sólo con la hora en la cual fue subido el post. Cada una de ellas viene acompa\~nada por un valor igual al número de comentarios de dicho post. El reduce sólo calcula la suma de todos los comentarios en una determinada hora.
+
+El segundo MapReduce, semejante al punto anterior, consiste en encontrar la hora cuyo número de comentarios es máximo, y aquella que minimiza dicho valor.
+
+~
+
+Encontramos que los posts subidos de 00:00 a 01:00 son aquellos que más comentarios suman, con un total de 632402 comentarios. Luego de 01:00 a 02:00 es el horario en el cual menos comentarios hay, con tan solo 91634, lo cual parece ser razonable si pensamos que el momento pico de actividad es antes de ir a dormir.
