@@ -33,19 +33,25 @@ MongoDB soporta sharding a través de estructuras llamadas \emph{sharded cluster
 que cuentan con los siguientes componentes:
 
 \begin{itemize}
-	\item Shards o \emph{mongod}
+	\item Shards o \emph{mongods}
 	\item Query routers o \emph{mongos}
 	\item Config servers 
 \end{itemize}
 
+Shards o \emph{mongods} son los nodos de almacenamiento de datos. Cada nodo está compuesto por un \emph{replica sets}. 
+Los Query routers o \emph{mongos} actúan de intermediarios entre los pedidos de los clientes y los shards correspondientes
+que contienen esos datos específicos. Un cluster puede contener más de un query router (y es conveniente que así) sea,
+para disminuír cantidad de pedidos que debe manejar un único nodo.
+Finalmente, los Config servers almacenan la metadata del cluster: principalmente, el mapeo de los datos en cada uno de los
+shards.
 
 \subsection{Decisiones de arquitectura}
 
 Para establecer la base de datos de \emph{Rededit} tomamos las siguientes decisiones de arquitectura:
 
-\subsubsection{\emph{Replica set}}
+\subsubsection{\emph{Mongods y Replica sets}}
 
-Cada \emph{shard} está constituido por un \emph{replica set}: un conjunto de procesos \emph{mongod} que mejoran la 
+Cada \emph{shard} está constituido por un \emph{replica set}: un conjunto de procesos que mejoran la 
 disponibilidad de los datos del
 servidor en base a la redundancia. Existen tres tipos de miembros:
 
@@ -69,6 +75,15 @@ Una estructura conformada por tres nodos, todas ellas almacenando datos:
 
 Mediante esta elección disponemos de 2 copias completas del set de datos además del primario. Provee tolerancia a fallos
 en el nodo primario, y buena velocidad de respuesta debido a la redundancia.
+
+\subsubsection{Config servers}
+
+El cluster va a contar con 3 servidores de configuración (Cantidad sugerida por \emph{MongoDB-sharding-guide}).
+
+
+
+
+
 
 
 
