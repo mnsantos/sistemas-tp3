@@ -1,3 +1,6 @@
+\subsection{Una única instancia de MongoDB. Prueba de concepto MapReduce}
+
+
 En esta sección implementaremos distintos algoritmos de análisis de datos para operar sobre una peque\~na colección de posts de $Rededit$, con un tama\~no aproximado de 17MB. Dado el peque\~no volumen de datos con el cual trabajaremos dispondremos de una única instancia de MongoDB (no sharding).
 
 
@@ -10,4 +13,31 @@ Queremos:
 \end{itemize}
 
 
+\subsubsection{Comunidad Upvoter-Neutral-Downvoter}
 
+Queremos analizar el comportamiento de la comunidad en base a una reducida colección de posts. Para determinar el vote-trend implementamos un único MapReduce sobre la colección de posts.
+
+
+La función \textbf{map} genera $cuatro$ claves:
+\begin{itemize}
+	\item $posts-upvoted$ obtiene un nuevo valor '1' por cada post donde los comentarios positivos superan en cantidad a los negativos.
+	\item $posts-downvoted$, a la inversa que el anterior, obtiene un nuevo valor '1' por cada post donde los downvotes superan a los upvotes.
+	\item $neutral-posts$ recibe un valor '1' por cada post donde los downvotes igualan en cantidad a los upvotes.
+	\item $vote-trend$ recibe un '1' por cada $post-upvoted$ y un '-1' por cada $post-downvoted$.
+\end{itemize}
+
+
+La función \textbf{reduce} se reduce en sumar todos los valores para cada clave. De esta forma contabilizamos los posts de votos positivos, los negativos y los neutrales, y al mismo tiempo calculamos el $vote-trend$ de manera tal que si el resultado es positivo la comunidad podría definirse como $upvoter$, $downvoter$ de lo contrario o $neutral$ si $vote-trend$ es exactamente cero.
+
+\subsubsection{Comentarios por submission}
+
+Queremos encontrar en promedio cuantos comentarios se realizan por cada submission. Para ello se implementa un único MapReduce sobre la colección de posts.
+
+
+La función \textbf{map} genera una única clave $comments$ donde por cada post se genera un valor con el numero de comentarios del mismo.
+
+
+La función \textbf{reduce} hace la suma total de todos los comentarios y luego hace el promedio.
+
+\subsubsection{Usuario con más puntaje}
+\subsubsection{Horario más y menos activo}
