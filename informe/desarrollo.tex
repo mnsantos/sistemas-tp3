@@ -1,7 +1,9 @@
 \input{mapreduce.tex}
 
-Debemos realizar un manejo eficiente de la base de datos de \emph{Rededit}. Analicemos la estructura del razonamiento que 
-nos lleva a usar \emph{Haas} como una de las mejores alternativas para cumplir con este objetivo:
+\subsubsection{¿Dónde montar reddit?}
+
+Debemos realizar un manejo eficiente de la base de datos de \emph{Rededit}. El siguiente esquema representa las distintas
+alternativas que podemos tomar:
 
 ~
 
@@ -13,4 +15,10 @@ nos lleva a usar \emph{Haas} como una de las mejores alternativas para cumplir c
 	\end{center}
 \end{figure}
 \FloatBarrier
+
+Si la base de datos es peque\~na, como por ejemplo menor a 5TB y no se espera que crezca demasiado
+nos conviene tener un único servidor funcionando. Sin embargo, a medida que el volumen de datos
+empieza a resulta necesario aplicar sharding sobre nuestros datos para mantener la performance del sistema. En ese
+momento nos planteamos 2 alternativas. ¿Montamos la aplicación sobre hardware propio o contratamos web-services 
+de alguno de los proveedores como Amazon o Google? En las siguientes secciones vamos a analizar cada uno de los casos.
 

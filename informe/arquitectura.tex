@@ -1,17 +1,22 @@
 \subsection{Sharding, conceptos generales}
 
-''Sharding is the process of storing data records across multiple machines and is MongoDB’s approach to meeting the
-demands of data growth. As the size of the data increases, a single machine may not be sufficient to store the data nor
-provide an acceptable read and write throughput. Sharding solves the problem with horizontal scaling. With sharding,
-you add more machines to support data growth and the demands of read and write operations.'' (MongoDB-sharding-guide)
+Sharding es el proceso de almacenar datos a lo largo de múltiples máquinas y es la herramienta a través de la 
+cual MongoDB combate el crecimiento de la demanda de datos. A medida que el tama\~no de los mismos aumenta,
+una única máquina puede no ser suficiente para almacenar y proveer rates de lectura y escritura aceptables.
+Sharding resuelve el problema de escalamiento horizontal. Se agregan más máquinas para soportar el crecimiento
+de los datos y la demanda de usuarios de la base de datos.
 
-''Vertical scaling adds more CPU and storage resources to increase capacity. Scaling by adding capacity has lim-
-itations: high performance systems with large numbers of CPUs and large amount of RAM are disproportionately
-more expensive than smaller systems. Additionally, cloud-based providers may only allow users to provision smaller
-instances. As a result there is a practical maximum capability for vertical scaling.'' (MongoDB-sharding-guide)
+Por el contrario, escalamiento vertical agrega más CPU y memoria para incrementar la capacidad. Escalar a través
+del aumento de los recursos de una única máquina tiene sus limitaciones: Los sistemas de alta performance con
+gran cantidad de CPU's y memoria RAM son desproporcionadamente más costosos que un conjunto de sistemas 
+peque\~nos. En suma, los proveedores basados en la nube únicamente proveen instancias peque\~nas a los
+usuarios. Como resultado, hay un tope máximo en la capacidad de escalar a nivel vertical.
 
-''Sharding, or horizontal scaling, by contrast, divides the data set and distributes the data over multiple servers, or
-shards. Each shard is an independent database, and collectively, the shards make up a single logical database.''
+Por el contrario, sharding o escalamiento horizontal, divide el set de datos y lo distribuye a lo largo de 
+múltiples servidores. Cada shard es una base de datos independiente, y colectivamente, los shards conforman
+una única lógica base de datos.
+
+MongoDB sharding-guide.
 
 \subsection{Sharding en MongoDB}
 
