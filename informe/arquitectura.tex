@@ -58,12 +58,16 @@ servidor en base a la redundancia. Existen tres tipos de miembros:
 Decidimos adoptar una de las configuraciones típicas propuestas en \emph{MongoDB-replication-guide}: 
 Una estructura conformada por tres nodos, todas ellas almacenando datos: 
 
+~
+
 \begin{description}
 	\item[Uno primario] 
 	\item[Dos secundarios] Ambos son candidatos a volverse primarios luego de una elección, en el caso de una falla
 	en el nodo primario.
 	\item[Ningún árbitro]
 \end{description}
+
+~
 
 Mediante esta elección disponemos de 2 copias completas del set de datos además del primario. Provee tolerancia a fallos
 en el nodo primario, y buena velocidad de respuesta debido a la redundancia.
@@ -77,6 +81,15 @@ El cluster va a contar con 3 servidores de configuración (Cantidad sugerida por
 El cluster cuenta inicialmente con 2 \emph{mongos} o query routers y 2 shards (cluster minimal de MongoDB). La idea es
 ir incrementando la cantidad de nodos a medida que aumente la cantidad de usuarios de
 la aplicación, y por lo tanto, las necesidades de nuestro servidor para satisfacer exitosamente todos los pedidos.
+
+\begin{figure}[!h]
+	\begin{center}
+		  \includegraphics[scale=0.6]{imagenes/im_3.pdf}
+		  \caption{Arquitectura inicial con la que empieza la base de datos de mongoDB}
+		  \label{fig:contra1}
+	\end{center}
+\end{figure}
+\FloatBarrier
 
 \subsection{Incremento de Mongos y shards}
 

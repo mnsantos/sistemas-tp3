@@ -200,3 +200,26 @@ con otras como Amazon o Google.
 En resumen, la migración de \emph{Haas} hacia hardware propio no parece algo demasiado seguro .
 
 
+\subsubsection{Hecho real: Reddit sobre Amazon Ec2}
+
+Reddit es una página de internet en donde los usuarios postean, comentan y votan
+ideas, hechos y acontecimientos de interés general. Actualmente el sitio corre enteramente sobre AWS Ec2, y escala
+exitosamente mes tras mes, lo que le posibilita poder manejar hasta 4 billones de visitas a su página por mes.
+Según Keith Mitchell (programador del sitio), en un video que podemos ver en: 
+http://aws.amazon.com/solutions/case-studies/reddit/ (link desde la página oficial de aws), explica que 
+la empresa migró de tener sus propios servidores físicos a contratar los servicios de Amazon obteniendo resultados
+asombrosos. Anteriormente disponían de 5 equipos completos de mantenimiento de hardware (hecho que resultaba
+costoso). La empresa cuenta actualmente con menos de 20 empleados, y este hecho no les impide manejar el volumen de
+datos que maneja. Debido al encapsulamiento que provee el uso de web-services,
+pueden enfocarse en cuestiones como el código de la aplicación en sí mismo, o aspectos publicitarios.
+
+~
+
+\begin{figure}[!h]
+    \begin{center}
+          \includegraphics[scale=0.4]{imagenes/im_2.jpg}
+          \caption{Esquema gráfico: datos reales de Reddit}
+          \label{fig:contra1}
+    \end{center}
+\end{figure}
+\FloatBarrier
