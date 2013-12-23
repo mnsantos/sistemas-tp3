@@ -9,13 +9,13 @@ Queremos:
 	\item Analizar la reacción de la comunidad en promedio frente a posts de otros usuarios.
 	\item Calcular un promedio de comentarios por submission.
 	\item Encontrar el usuario con mayor score.
-	\item Determinar en que horario se producen más comentarios, y en cual se comenta menos.
+	\item Determinar en qué horario se producen más comentarios, y en cuál se comenta menos.
 \end{itemize}
 
 
 \subsubsection{Comunidad Upvoter-Neutral-Downvoter}
 
-Queremos analizar el comportamiento de la comunidad en base a una reducida colección de posts. Para determinar el vote-trend implementamos un único MapReduce sobre la colección de posts.
+Queremos analizar el comportamiento de la comunidad en base a una reducida colección de posts. Para determinar el vote-trend implementamos un único MapReduce sobre dicha colección.
 
 
 La función \textbf{map} genera $cuatro$ claves:
@@ -27,7 +27,7 @@ La función \textbf{map} genera $cuatro$ claves:
 \end{itemize}
 
 
-La función \textbf{reduce} se reduce en sumar todos los valores para cada clave. De esta forma contabilizamos los posts de votos positivos, los negativos y los neutrales, y al mismo tiempo calculamos el $vote-trend$ de manera tal que si el resultado es positivo la comunidad podría definirse como $upvoter$, $downvoter$ de lo contrario o $neutral$ si $vote-trend$ es exactamente cero.
+La función \textbf{reduce} se reduce en sumar todos los valores para cada clave. De esta forma contabilizamos los posts de votos positivos, negativos y neutrales y, al mismo tiempo, calculamos el $vote-trend$. Si este último resultado es positivo la comunidad podría definirse como $upvoter$. Si es negativo clasificaría como $downvoter$ o $neutral$ si $vote-trend$ es exactamente cero. 
 
 ~
 
@@ -35,7 +35,7 @@ Con 21270 $downvoted-posts$, 106092 $upvoted-posts$ y 4941 $neutral-posts$, el $
 
 \subsubsection{Comentarios por submission}
 
-Queremos encontrar en promedio cuantos comentarios se realizan por cada submission. Para ello se implementa un único MapReduce sobre la colección de posts en conjunto con la función finalize para calcular el promedio final.
+Se desea encontrar en promedio cuántos comentarios se realizan por cada submission. Para ello se implementa un único MapReduce sobre la colección de posts en conjunto con una función finalize para calcular el promedio final.
 
 ~
 
@@ -53,7 +53,7 @@ Como resultado obtuvimos que, en promedio, se efectuan alrededor de 39 comentari
 
 \subsubsection{Usuario con más puntaje}
 
-Queremos encontrar el usuario cuya suma de los scores de sus posts supere la de los demás. Para ello encadenamos dos MapReduce: el primero sobre la colección posts y el segundo sobre la colección generada por el primer MapReduce.
+Queremos hallar el usuario cuya suma de los scores de sus posts supere la de los demás. Para ello encadenamos dos MapReduce: el primero sobre la colección posts y el segundo sobre la colección generada por el primer MapReduce.
 
 ~
 
@@ -67,11 +67,11 @@ Encontramos que el usuario con mayor score es 'nombre vacio' con 1311814 pts.
 
 \subsubsection{Horario más y menos activo}
 
-Queremos encontrar el horario en el cual la comunidad participa más comentando posts, es decir, determinar de alguna manera el mejor horario para postear. Análogamente determinamos el horario en el cual menos se comenta. Para ello utilizamos nuevamente dos MapReduce encadenados.
+Queremos encontrar el horario en el cual la comunidad participa más comentando posts, es decir, determinar de alguna manera el mejor horario para postear. Análogamente, hallamos el horario en el cual menos se comenta. Para ello utilizamos nuevamente dos MapReduce encadenados.
 
 ~
 
-El primer MapReduce se resume en generar una clave por hora, es decir un total de 24 claves. Para ello se utiliza la función $substring(int idx0, int idxn)$ para quedarnos a partir del $raw-time$ sólo con la hora en la cual fue subido el post. Cada una de ellas viene acompa\~nada por un valor igual al número de comentarios de dicho post. El reduce sólo calcula la suma de todos los comentarios en una determinada hora.
+El primer MapReduce se resume en generar una clave por hora, es decir un total de 24 claves. Para ello se utiliza la función $substring(int \ idx0, \ int \ idxn)$ para obtener del $raw-time$ sólo la hora en la cual fue subido el post. Cada una de ellas viene acompa\~nada por un valor igual al número de comentarios de dicho post. El reduce sólo calcula la suma de todos los comentarios en una determinada hora.
 
 El segundo MapReduce, semejante al punto anterior, consiste en encontrar la hora cuyo número de comentarios es máximo, y aquella que minimiza dicho valor.
 
