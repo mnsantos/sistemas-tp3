@@ -9,7 +9,7 @@ muy f\'acilmente y con peso computacional distribuido.
 
 
 Aun as\'i, errores en el c\'odigo pueden llevar a resultados inesperadamente engañosos, 
-por lo que es importante que las funciones $map$ y $reduce$ cumplan con ciertos requisitos (http://docs.mongodb.org/manual/reference/command/mapReduce/\#mapreduce-map-cmd), 
+por lo que es importante que las funciones $map$ y $reduce$ cumplan con ciertos requisitos \footnote{http://docs.mongodb.org/manual/reference/command/mapReduce/\#mapreduce-map-cmd}, 
 fundamentalmente idempotencia en la funci\'on $reduce$, que el orden de los valores no altere el resultado final, y que el valor de retorno 
 de la funci\'on $reduce$ matchee con el valor emitido por $map$ (puesto que puede que se llame a $reduce$ mas de una vez para la misma key).
 

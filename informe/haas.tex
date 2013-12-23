@@ -40,8 +40,7 @@ El mismo está basado en AMI's (Amazon Machine Images). Cada machine image puede
 en donde cada instancia es equivalente a una de las máquinas virtuales mencionadas anteriormente.
 
 
-Según la documentación
-oficial de MongoDB (http://docs.mongodb.org/ecosystem/platforms/amazon-ec2/), mongo es compatible con Amazon Ec2.
+Según la documentación oficial de MongoDB \footnote{http://docs.mongodb.org/ecosystem/platforms/amazon-ec2/}, mongo es compatible con Amazon Ec2.
 En suma, existen 3 AMI's oficiales: 
 
 ~
@@ -78,7 +77,7 @@ memoria y recursos de red.
 
 Otra posibilidad en vez de utilizar las máquinas proupestas por el manual para los nodos de los shrads
 consiste en utilizar instancias
-optimizadas para almacenamiento: I2 y HI1. (http://aws.amazon.com/ec2/instance-types/). Las mismas están optimizadas
+optimizadas para almacenamiento: I2 y HI1. \footnote{http://aws.amazon.com/ec2/instance-types/}. Las mismas están optimizadas
 para obtener una gran densidad de almacenamiento con bajo costo, y una gran performance en operaciones de I/0.
 Los discos son SSD.
 Estas instancias funcionan muy bien con bases de datos noSQL, como mongoDB.
@@ -105,15 +104,15 @@ la incorporación de S3, en el caso de que queramos combinar mongoDB con otro ti
 : Simple storage service. Una interfaz
 utilizada para almacenar y envíar datos a cualquier lugar de la web. Los procedimientos se realizan de forma segura,
 confiable, rápida y con precios accesibles de forma tal que nuestra aplicación pueda escalar a medida que el volumen
-de transferencias sea cada vez mayor. (http://aws.amazon.com/s3/)
+de transferencias sea cada vez mayor. \footnote{http://aws.amazon.com/s3/}
 
 ~
 
 Finalmente podemos utilizar Ec2 Auto-Scaling con las condiciones que habíamos definido anteriormente (duplicar
 la cantidad de AMI's en los casos en donde los datos superen los $\frac{3}{4}$ o disminuyan a menos de $\frac{1}{4}$,
 o cuando sea necesario aumentar o disminuir la cantidad de query routers). De esta manera podemos aprovechar la 
-flexibilidad del servicio pagando únicamente por los recursos que efectivamente estamos consumiendo:
-http://aws.amazon.com/autoscaling/.
+flexibilidad del servicio pagando únicamente por los recursos que efectivamente estamos consumiendo.
+\footnote{http://aws.amazon.com/autoscaling/}
 
 
 \subsubsection{Google compute engine}
@@ -137,10 +136,10 @@ Finalmente, así como Amazon ofrecía el servicio de S3, google provee \emph{Clo
 caso de que queramos combinar mongoDB con otras tecnologías. 
 
 Si bien ''Google compute engine'' no está incluída como opción en el conjunto de plataformas que soporta mongoDB 
-mencionadas en el manual (http://docs.mongodb.org/ecosystem/platforms/), actualmente existe dicho soporte. 
+mencionadas en el manual \footnote{http://docs.mongodb.org/ecosystem/platforms/}, actualmente existe dicho soporte. 
 Las capacidades de la infraestructura de GCE hacen que la base de datos pueda funcionar muy satisfactoriamente, 
-principalmente por la velocidad de la red que hemos mencionado más arriba:
-http://blog.mongolab.com/2013/05/mongolab-now-supports-google-cloud-platform/
+principalmente por la velocidad de la red que hemos mencionado más arriba
+\footnote{http://blog.mongolab.com/2013/05/mongolab-now-supports-google-cloud-platform/}.
 
 \subsubsection{dotCloud}
 
@@ -149,7 +148,7 @@ La principal ventaja de dotCloud es que permite correr las aplicaciones y manten
 para optimizar la latencia y confiabilidad.
 
 Por estos motivos, dotCloud aparece como segunda alternativa en la documentación de plataformas de mongo.
-(http://docs.mongodb.org/ecosystem/platforms/dotcloud/).
+\footnote{http://docs.mongodb.org/ecosystem/platforms/dotcloud/)}.
 
 Para inicializar nuestra aplicación podemos olvidar la arquitectura diseñada previamente y dejar que dotCloud realice
 las configuraciones de escalabilidad de manera automática. 
