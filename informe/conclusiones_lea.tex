@@ -1,0 +1,23 @@
+El modelo de procesamiento map reduced permite escalar la base de datos horizontalmente.
+
+Al utilizar este paradigma, mongoDB puede explotar todos los recursos que brinda un cluster de procesamiento.
+
+Para montar inicialmente la base de datos de \emph{Reddit} proponemos un cluster minimal que soporta sharding (2 query routers, 3 config servers y 2 shards).
+La idea es ir agregando o quitando nodos a medida que la demanada aumenta o disminuye.
+
+Alcanzada esta etapa abrimos el siguiente interrogante: ¿Conviene montar el cluster con hardware propio o utilizar web-services provistos por empresas como 
+Amazon o google? El primer camino es riesgoso a nivel económico, ya que requiere una fuerte inversión inicial, poca flexibilidad para escalar 
+junto con las fluctuaciones de la demanda 
+y la necesidad de invertir
+recursos en el mantenimiento de hardware. La segunda, por el contrario, es mucho más viable. La empresa puede obtener poder de procesamiento y almacenamiento
+a través de máquinas virtuales por un bajo costo. Al tratarse justamente de componentes no físicos, el usuario puede pedir o liberar los recursos de forma
+rápida y flexible. De esta manera termina pagando exactamente por los recursos que está utilizando, y no más que eso. En suma, se libera de la responsabilidad
+de realizar cualquier tipo de tarea de mantenimiento. Los precios bajos y el buen rendimiento de este tipo de servicios permite que las aplicaciones (junto con
+sus bases de datos) escalen tanto en performance como económicamente a medida que el volumen de los datos y de los clientes aumenta. Finalmente optamos por los 
+servicios Ec2 de AWS debido a que ofrecen un soporte oficial para mongoDB.
+
+Muchas aplicaciones y páginas webs importantes en la actualidad se han beneficiado con el surgimiento y desarrollo de ''cloud computing'' y del fenómeno 
+''everything as a service'' (donde \emph{Haas} está incluído). Reddit es un ejemplo real. Una página web que soporta 4 billones de visitas diarias es capaz
+de funcionar con menos de 20 empleados debido a que delega gran parte de las responsabilidades necesarias para el funcionamiento de su aplicación en los 
+servicios de Amazon.
+
