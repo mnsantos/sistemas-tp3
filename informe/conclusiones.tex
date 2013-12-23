@@ -1,3 +1,16 @@
 Durante el transcurso de este trabajo pr\'actico comprendimos los usos y ventajas del paradigma MapReduce para an\'alisis de datos en sistemas distribuidos, 
 as\'i como tambien las ventajas de montar un proyecto sobre HaaS, evaluando distintas alternativas de dicho servicio.
-Entendemos que 
+
+
+Entendemos que, para la primera parte, MapReduce ofrece una gran herramienta al momento de efectuar ciertos an\'alisis sobre 
+bases de datos muy extensas, dado que se puede paralelizar de manera distribuida sin perder precisi\'on en los resultados. A su vez, 
+encadenando secuencialmente Map Reduces sobre las sucesivas colecciones que se van generando se pueden realizar profundos an\'alisis 
+muy f\'acilmente y con peso computacional distribuido.
+
+
+Aun as\'i, errores en el c\'odigo pueden llevar a resultados inesperadamente engañosos, 
+por lo que es importante que las funciones $map$ y $reduce$ cumplan con ciertos requisitos (http://docs.mongodb.org/manual/reference/command/mapReduce/\#mapreduce-map-cmd), 
+fundamentalmente idempotencia en la funci\'on $reduce$, que el orden de los valores no altere el resultado final, y que el valor de retorno 
+de la funci\'on $reduce$ matchee con el valor emitido por $map$ (puesto que puede que se llame a $reduce$ mas de una vez para la misma key).
+
+\input{conclusiones_lea.tex}
